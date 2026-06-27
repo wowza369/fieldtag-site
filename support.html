@@ -12,69 +12,82 @@
 
     :root {
       --bg: #0F1117;
-      --bg2: #161820;
-      --card: #1C1E28;
-      --border: #2a2d3a;
+      --bg2: #141720;
+      --bg3: #1C1F2A;
+      --border: #2E3347;
       --accent: #2E86DE;
-      --accent-hover: #1a6bbf;
-      --text: #F0F0F0;
-      --muted: #8b8fa8;
+      --accent-dark: #1B5FA8;
+      --text: #F9FAFB;
+      --muted: #9CA3AF;
+      --dim: #6B7280;
       --radius: 12px;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* NAV */
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV — matches index.html exactly */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(15,17,23,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+      border-bottom: 0.5px solid var(--border);
       padding: 0 24px;
       height: 60px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .wordmark {
-      font-family: 'Rajdhani', sans-serif;
+    .nav-logo {
+      font-size: 16px;
       font-weight: 700;
-      font-size: 1.3rem;
-      letter-spacing: 0.08em;
-      color: var(--text);
+      letter-spacing: 3px;
+      color: var(--accent);
+      font-family: Georgia, serif;
+      cursor: pointer;
+      flex-shrink: 0;
       text-decoration: none;
     }
 
-    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+    }
+
     .nav-links a {
+      font-size: 14px;
       color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.15s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
 
-    .nav-download {
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+
+    .nav-cta {
       background: var(--accent);
       color: #fff !important;
+      font-size: 13px;
+      font-weight: 600;
       padding: 8px 18px;
       border-radius: 8px;
-      font-weight: 600 !important;
-      transition: background 0.2s !important;
+      transition: background 0.15s !important;
     }
-    .nav-download:hover { background: var(--accent-hover) !important; color: #fff !important; }
+
+    .nav-cta:hover { background: var(--accent-dark) !important; }
 
     /* HERO */
     .support-hero {
@@ -82,18 +95,19 @@
       padding: 72px 24px 48px;
     }
     .support-hero .label {
-      font-size: 0.75rem;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
+      color: var(--dim);
+      margin-bottom: 12px;
     }
     .support-hero h1 {
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
       line-height: 1.15;
       margin-bottom: 16px;
+      letter-spacing: -0.02em;
     }
     .support-hero p {
       color: var(--muted);
@@ -111,14 +125,12 @@
       padding: 0 24px 80px;
     }
 
-    /* FAQ */
     .section-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 600;
       letter-spacing: 0.1em;
-      font-size: 0.75rem;
+      color: var(--dim);
+      text-transform: uppercase;
       margin-bottom: 20px;
       margin-top: 48px;
     }
@@ -126,8 +138,8 @@
     .faq-list { display: flex; flex-direction: column; gap: 12px; }
 
     details {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--bg3);
+      border: 0.5px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
     }
@@ -149,24 +161,25 @@
       font-size: 1.2rem;
       color: var(--accent);
       flex-shrink: 0;
-      transition: transform 0.2s;
     }
     details[open] summary::after { content: '−'; }
 
     .faq-body {
-      padding: 0 20px 18px;
+      padding: 16px 20px 18px;
       color: var(--muted);
       font-size: 0.93rem;
       line-height: 1.7;
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
+      border-top: 0.5px solid var(--border);
     }
+
+    .faq-body a { color: var(--accent); }
+    .faq-body a:hover { text-decoration: underline; }
 
     /* CONTACT */
     .contact-card {
       margin-top: 48px;
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--bg3);
+      border: 0.5px solid var(--border);
       border-radius: var(--radius);
       padding: 36px;
       text-align: center;
@@ -192,40 +205,40 @@
       border-radius: 10px;
       font-weight: 600;
       font-size: 1rem;
-      transition: background 0.2s;
+      transition: background 0.15s;
     }
-    .email-btn:hover { background: var(--accent-hover); }
+    .email-btn:hover { background: var(--accent-dark); }
     .email-btn svg { width: 18px; height: 18px; }
 
     /* FOOTER */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      text-align: center;
+      background: #0A0D13;
+      border-top: 0.5px solid var(--border);
+      padding: 28px 24px;
     }
-    .footer-inner { max-width: 760px; margin: 0 auto; }
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
     .footer-logo {
-      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
       font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      display: block;
-      margin-bottom: 16px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      font-family: Georgia, serif;
     }
-    .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--text); }
-    .footer-copy { color: var(--muted); font-size: 0.8rem; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--dim); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--muted); }
+    .footer-copy { font-size: 12px; color: var(--dim); }
 
     @media (max-width: 600px) {
-      .nav-links { gap: 16px; }
-      .nav-links a:not(.nav-download) { display: none; }
+      .nav-links a:not(.nav-cta) { display: none; }
       .contact-card { padding: 24px 20px; }
     }
   </style>
@@ -233,12 +246,12 @@
 <body>
 
   <nav>
-    <a href="/" class="wordmark">FIELD-TAG</a>
+    <a href="/index.html" class="nav-logo">FIELD-TAG</a>
     <div class="nav-links">
       <a href="/#features">Features</a>
       <a href="/#pricing">Pricing</a>
       <a href="/support.html" class="active">Support</a>
-      <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="nav-download">Download</a>
+      <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="nav-cta">Download</a>
     </div>
   </nav>
 
@@ -299,7 +312,7 @@
       <details>
         <summary>Is my data stored or shared?</summary>
         <div class="faq-body">
-          Photos are sent to OpenAI's API for processing and are not stored by FieldTag beyond your local scan history. We do not sell or share your data with third parties. See our <a href="/privacy.html" style="color: var(--accent);">Privacy Policy</a> for full details.
+          Photos are sent to OpenAI's API for processing and are not stored by FieldTag beyond your local scan history. We do not sell or share your data with third parties. See our <a href="/privacy.html">Privacy Policy</a> for full details.
         </div>
       </details>
 
@@ -328,13 +341,13 @@
 
   <footer>
     <div class="footer-inner">
-      <span class="footer-logo">FIELD-TAG</span>
+      <div class="footer-logo">FIELD-TAG</div>
       <div class="footer-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
+        <a href="/privacy.html">Privacy policy</a>
+        <a href="/terms.html">Terms of service</a>
         <a href="/support.html">Support</a>
       </div>
-      <p class="footer-copy">© 2026 FieldTag</p>
+      <div class="footer-copy">© 2026 FieldTag</div>
     </div>
   </footer>
 
