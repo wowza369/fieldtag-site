@@ -178,7 +178,7 @@
 
     .lightbox img {
       max-height: 88vh;
-      max-width: 90vw;
+      max-width: 80vw;
       border-radius: 20px;
       box-shadow: 0 24px 80px rgba(0,0,0,0.8);
     }
@@ -204,6 +204,49 @@
     }
 
     .lightbox-close:hover { background: rgba(255,255,255,0.28); }
+
+    .lightbox-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      user-select: none;
+    }
+
+    .lightbox-arrow:hover { background: rgba(255,255,255,0.28); }
+    .lightbox-arrow.prev { left: 20px; }
+    .lightbox-arrow.next { right: 20px; }
+
+    .lightbox-dots {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .lightbox-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .lightbox-dot.active { background: #fff; }
 
     /* ── Download buttons ────────────────────────────────── */
     .hero-btns {
@@ -463,15 +506,25 @@
       .nav-links a:not(.nav-cta) { display: none; }
       .screenshot-wrap img { width: 120px; }
       .hero-screenshots { gap: 12px; }
+      .lightbox-arrow { width: 36px; height: 36px; font-size: 16px; }
+      .lightbox-arrow.prev { left: 10px; }
+      .lightbox-arrow.next { right: 10px; }
     }
   </style>
 </head>
 <body>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox" id="lightbox">
     <span class="lightbox-close" onclick="closeLightbox()">&#x2715;</span>
+    <span class="lightbox-arrow prev" onclick="changeImage(-1)">&#8249;</span>
     <img id="lightbox-img" src="" alt="">
+    <span class="lightbox-arrow next" onclick="changeImage(1)">&#8250;</span>
+    <div class="lightbox-dots">
+      <div class="lightbox-dot" onclick="goToImage(0)"></div>
+      <div class="lightbox-dot" onclick="goToImage(1)"></div>
+      <div class="lightbox-dot" onclick="goToImage(2)"></div>
+    </div>
   </div>
 
   <!-- Nav -->
@@ -493,15 +546,15 @@
 
     <!-- Screenshots -->
     <div class="hero-screenshots">
-      <div class="screenshot-wrap" onclick="openLightbox('screenshot_1_home.png')">
+      <div class="screenshot-wrap" onclick="openLightbox(0)">
         <img src="screenshot_1_home.png" alt="FieldTag home screen">
         <span class="screenshot-label">Choose how to scan</span>
       </div>
-      <div class="screenshot-wrap" onclick="openLightbox('screenshot_2_processing.png')">
+      <div class="screenshot-wrap" onclick="openLightbox(1)">
         <img src="screenshot_2_processing.png" alt="FieldTag processing screen">
         <span class="screenshot-label">AI decodes the tag</span>
       </div>
-      <div class="screenshot-wrap" onclick="openLightbox('screenshot_3_results.png')">
+      <div class="screenshot-wrap" onclick="openLightbox(2)">
         <img src="screenshot_3_results.png" alt="FieldTag results screen">
         <span class="screenshot-label">Full specs in seconds</span>
       </div>
@@ -670,20 +723,53 @@
   </footer>
 
   <script>
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
+    const images = [
+      'screenshot_1_home.png',
+      'screenshot_2_processing.png',
+      'screenshot_3_results.png'
+    ];
+    let currentIndex = 0;
+
+    function updateDots() {
+      document.querySelectorAll('.lightbox-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
     }
 
-    function closeLightbox(e) {
-      if (e && e.target === document.getElementById('lightbox-img')) return;
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById('lightbox-img').src = images[currentIndex];
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      updateDots();
+    }
+
+    function closeLightbox() {
       document.getElementById('lightbox').classList.remove('active');
       document.body.style.overflow = '';
     }
 
+    function changeImage(direction) {
+      currentIndex = (currentIndex + direction + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[currentIndex];
+      updateDots();
+    }
+
+    function goToImage(index) {
+      currentIndex = index;
+      document.getElementById('lightbox-img').src = images[currentIndex];
+      updateDots();
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
     document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      if (e.key === 'ArrowRight') changeImage(1);
     });
   </script>
 
