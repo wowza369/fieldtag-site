@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — FieldTag</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0F1117;
+      --bg2: #161820;
+      --card: #1C1E28;
+      --border: #2a2d3a;
+      --accent: #2E86DE;
+      --accent-hover: #1a6bbf;
+      --text: #F0F0F0;
+      --muted: #8b8fa8;
+      --radius: 12px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    .nav-download {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-download:hover { background: var(--accent-hover) !important; color: #fff !important; }
+
+    /* HERO */
+    .support-hero {
+      text-align: center;
+      padding: 72px 24px 48px;
+    }
+    .support-hero .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .support-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .support-hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* FAQ */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      margin-bottom: 20px;
+      margin-top: 48px;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 18px 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after { content: '−'; }
+
+    .faq-body {
+      padding: 0 20px 18px;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* CONTACT */
+    .contact-card {
+      margin-top: 48px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      text-align: center;
+    }
+    .contact-card h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .contact-card p {
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .email-btn:hover { background: var(--accent-hover); }
+    .email-btn svg { width: 18px; height: 18px; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 760px; margin: 0 auto; }
+    .footer-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 0.8rem; }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .nav-links a:not(.nav-download) { display: none; }
+      .contact-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="wordmark">FIELD-TAG</a>
+    <div class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/support.html" class="active">Support</a>
+      <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="nav-download">Download</a>
+    </div>
+  </nav>
+
+  <div class="support-hero">
+    <div class="label">Help & Support</div>
+    <h1>How can we help?</h1>
+    <p>Find answers to common questions below, or reach out and we'll get back to you.</p>
+  </div>
+
+  <main>
+
+    <div class="section-title">Frequently Asked Questions</div>
+
+    <div class="faq-list">
+
+      <details>
+        <summary>How do I scan an equipment tag?</summary>
+        <div class="faq-body">
+          Open FieldTag and tap <strong>Take a Photo</strong> to use your camera, or <strong>Upload an Image</strong> to use a photo from your library. You can also tap <strong>Enter Manually</strong> to type in a model and serial number. FieldTag will decode the tag and return full specs within seconds.
+        </div>
+      </details>
+
+      <details>
+        <summary>What types of equipment can FieldTag decode?</summary>
+        <div class="faq-body">
+          FieldTag decodes data tags on HVAC units (air conditioners, heat pumps, furnaces, air handlers), water heaters, electrical panels, and appliances. It reads age, capacity, efficiency ratings, refrigerant type, electrical requirements, and more.
+        </div>
+      </details>
+
+      <details>
+        <summary>What's included in the free version?</summary>
+        <div class="faq-body">
+          The free version includes full equipment decoding, age and refrigerant info, electrical specs, service manual lookup, CPSC recall search, and Field Guide reference charts. Ads are shown between scans. Jobs, scan history, and PDF export require a Pro subscription.
+        </div>
+      </details>
+
+      <details>
+        <summary>What does FieldTag Pro include?</summary>
+        <div class="faq-body">
+          Pro includes everything in Free plus: GPT-4.1 for maximum scan accuracy, Jobs (create job sites and scan all equipment on-site), 90-day scan history with photos, PDF reports, search and notes on saved scans, and no ads — ever. Pro is $5.99/month or $49.99/year (2 months free). A 7-day free trial is included.
+        </div>
+      </details>
+
+      <details>
+        <summary>How do I cancel my Pro subscription?</summary>
+        <div class="faq-body">
+          Subscriptions are managed through your Apple ID. To cancel, go to <strong>Settings → Apple ID → Subscriptions</strong> on your iPhone and tap FieldTag Pro. You can cancel at any time and you'll retain Pro access until the end of the billing period.
+        </div>
+      </details>
+
+      <details>
+        <summary>The scan result looks wrong — what should I do?</summary>
+        <div class="faq-body">
+          Make sure the data tag is well-lit and the photo is in focus. For best results, get close to the tag and make sure the entire label is visible. If the model or serial number was misread, use the <strong>Edit & Re-scan</strong> option on the results screen to correct it manually. If you continue having issues, email us and include a photo of the tag.
+        </div>
+      </details>
+
+      <details>
+        <summary>Is my data stored or shared?</summary>
+        <div class="faq-body">
+          Photos are sent to OpenAI's API for processing and are not stored by FieldTag beyond your local scan history. We do not sell or share your data with third parties. See our <a href="/privacy.html" style="color: var(--accent);">Privacy Policy</a> for full details.
+        </div>
+      </details>
+
+      <details>
+        <summary>Is FieldTag available on Android?</summary>
+        <div class="faq-body">
+          FieldTag is currently available on iOS. Android support is in development and coming soon. Check back or email us to be notified when it launches.
+        </div>
+      </details>
+
+    </div>
+
+    <div class="contact-card">
+      <h2>Still need help?</h2>
+      <p>Our team usually responds within one business day.</p>
+      <a href="mailto:support@fieldtag.app" class="email-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="16" x="2" y="4" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        Email us at support@fieldtag.app
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">FIELD-TAG</span>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/support.html">Support</a>
+      </div>
+      <p class="footer-copy">© 2026 FieldTag</p>
+    </div>
+  </footer>
+
+</body>
+</html>
