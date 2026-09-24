@@ -524,7 +524,8 @@
     .disclaimer { max-width: 720px; margin: 28px auto 0; text-align: center; font-size: 12px; color: var(--dim); line-height: 1.6; }
     .shots { padding: 64px 24px; background: var(--bg2); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
     .shots .hero-screenshots { margin-bottom: 0; }
-    @media (max-width: 600px) { .hero-screenshots { flex-wrap: wrap; } }
+    #gallery { flex-wrap: wrap; max-width: 900px; row-gap: 28px; }
+    @media (max-width: 600px) { #hero-shots { gap: 8px; } #hero-shots .screenshot-wrap img { width: 30vw; max-width: 120px; } #gallery .screenshot-wrap img { width: 42vw; max-width: 170px; } }
   </style>
 </head>
 <body>
@@ -758,12 +759,14 @@
   </footer>
 
   <script>
-    // Screenshot set. S1 (screenshots lane) replaces these files with 6.9" light/dark shots;
-    // edit this list only. {src, label}
+    // Screenshot set (S1, iPhone dark). Edit this list only. Hero shows the first 3; gallery shows all.
     const SHOTS = [
-      { src: 'screenshot_1_home.png', label: 'Choose how to scan' },
-      { src: 'screenshot_2_processing.png', label: 'AI decodes the tag' },
-      { src: 'screenshot_3_results.png', label: 'Full specs in seconds' }
+      { src: 'shots/home.jpg', label: 'Your tools, one tap away' },
+      { src: 'shots/scan-result.jpg', label: 'Decode any data tag' },
+      { src: 'shots/charge.jpg', label: 'Charge calculator' },
+      { src: 'shots/load-calc.jpg', label: 'Load calculation' },
+      { src: 'shots/seer-savings.jpg', label: 'SEER savings' },
+      { src: 'shots/repair-replace.jpg', label: 'Repair vs. replace' }
     ];
     const images = SHOTS.map(s => s.src);
     let currentIndex = 0;
@@ -772,7 +775,7 @@
       return '<div class="screenshot-wrap" onclick="openLightbox(' + i + ')"><img src="' + s.src + '" alt="FieldTag: ' + s.label + '"><span class="screenshot-label">' + s.label + '</span></div>';
     }
     const all = SHOTS.map(shotHTML).join('');
-    document.getElementById('hero-shots').innerHTML = all;
+    document.getElementById('hero-shots').innerHTML = SHOTS.slice(0, 3).map(shotHTML).join('');
     document.getElementById('gallery').innerHTML = all;
     document.getElementById('lightbox-dots').innerHTML = SHOTS.map((_, i) => '<div class="lightbox-dot" onclick="goToImage(' + i + ')"></div>').join('');
 
