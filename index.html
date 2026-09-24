@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FieldTag — Decode any equipment tag in seconds</title>
-  <meta name="description" content="Point your camera at any HVAC unit, water heater, appliance, or electrical panel. FieldTag reads the tag and gives you everything you need to know.">
+  <title>FieldTag — HVAC, Plumbing &amp; Electrical Toolkit</title>
+  <meta name="description" content="Calculators, field-guide references and an AI data-tag scanner for HVAC, plumbing and electrical pros. Load calc, charge, flue sizing, wire size and more. Free on iPhone and iPad.">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -510,6 +510,21 @@
       .lightbox-arrow.prev { left: 10px; }
       .lightbox-arrow.next { right: 10px; }
     }
+
+    /* ── WO3-B additions ─────────────────────────────────── */
+    .hero-badge + h1 { margin-top: 0; }
+    .widgets { padding: 64px 24px; }
+    .widget-cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 980px; margin: 0 auto; }
+    .widget-cat { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .widget-cat h3 { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; }
+    .widget-cat h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--dim); margin: 14px 0 6px; text-transform: uppercase; }
+    .widget-cat ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .widget-cat li { font-size: 13px; color: var(--muted); }
+    .widget-cat li::before { content: '›'; color: var(--accent); margin-right: 8px; }
+    .disclaimer { max-width: 720px; margin: 28px auto 0; text-align: center; font-size: 12px; color: var(--dim); line-height: 1.6; }
+    .shots { padding: 64px 24px; background: var(--bg2); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+    .shots .hero-screenshots { margin-bottom: 0; }
+    @media (max-width: 600px) { .hero-screenshots { flex-wrap: wrap; } }
   </style>
 </head>
 <body>
@@ -520,18 +535,14 @@
     <span class="lightbox-arrow prev" onclick="changeImage(-1)">&#8249;</span>
     <img id="lightbox-img" src="" alt="">
     <span class="lightbox-arrow next" onclick="changeImage(1)">&#8250;</span>
-    <div class="lightbox-dots">
-      <div class="lightbox-dot" onclick="goToImage(0)"></div>
-      <div class="lightbox-dot" onclick="goToImage(1)"></div>
-      <div class="lightbox-dot" onclick="goToImage(2)"></div>
-    </div>
+    <div class="lightbox-dots" id="lightbox-dots"></div>
   </div>
 
   <!-- Nav -->
   <nav>
     <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">FIELD-TAG</div>
     <div class="nav-links">
-      <a href="#features">Features</a>
+      <a href="#toolkit">Toolkit</a>
       <a href="#pricing">Pricing</a>
       <a href="/support.html">Support</a>
       <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="nav-cta">Download</a>
@@ -540,106 +551,140 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-badge">AI-powered equipment decoder</div>
-    <h1>Decode any equipment tag<br><span>in seconds</span></h1>
-    <p>Point your camera at any HVAC unit, water heater, appliance, or electrical panel — FieldTag reads the manufacturer's label and tells you everything you need to know.</p>
+    <div class="hero-badge">For HVAC, plumbing &amp; electrical pros</div>
+    <h1>The field toolkit<br><span>in your pocket</span></h1>
+    <p>Load calcs, charge, flue sizing, wire size and more — plus a scanner that decodes any equipment data tag. Everything a tech reaches for on the job, in one app.</p>
 
-    <!-- Screenshots -->
-    <div class="hero-screenshots">
-      <div class="screenshot-wrap" onclick="openLightbox(0)">
-        <img src="screenshot_1_home.png" alt="FieldTag home screen">
-        <span class="screenshot-label">Choose how to scan</span>
-      </div>
-      <div class="screenshot-wrap" onclick="openLightbox(1)">
-        <img src="screenshot_2_processing.png" alt="FieldTag processing screen">
-        <span class="screenshot-label">AI decodes the tag</span>
-      </div>
-      <div class="screenshot-wrap" onclick="openLightbox(2)">
-        <img src="screenshot_3_results.png" alt="FieldTag results screen">
-        <span class="screenshot-label">Full specs in seconds</span>
-      </div>
-    </div>
+    <div class="hero-screenshots" id="hero-shots"></div>
 
     <div class="hero-btns">
       <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="btn-app">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="currentColor"/></svg>
-        Download on App Store
+        Download on the App Store
       </a>
-      <span class="btn-ghost">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76c.3.16.64.19.96.09l13.26-7.62-2.86-2.87-11.36 10.4zM.5 1.28C.19 1.6 0 2.1 0 2.73v18.54c0 .63.19 1.13.5 1.45l.07.07 10.38-10.38v-.25L.57 1.21.5 1.28zM20.93 10.3l-2.78-1.6-3.17 3.17 3.17 3.17 2.81-1.62c.8-.46.8-1.21-.03-1.67v-.45zM4.14.24L17.4 7.86l-2.86 2.86L3.18.32c.32-.1.66-.07.96.08v-.16z" fill="currentColor"/></svg>
-        Google Play — coming soon
-      </span>
     </div>
-    <p class="hero-note">Free to download · No account required to get started</p>
+    <p class="hero-note">Free to download · iPhone &amp; iPad</p>
   </section>
 
-  <!-- Features -->
-  <section class="features" id="features">
-    <div class="section-label">WHAT FIELDTAG DOES</div>
-    <h2 class="section-title">Everything on the tag — decoded</h2>
-    <p class="section-sub">Age, refrigerant, electrical specs, efficiency ratings, service manuals — all from a single photo.</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📷</div>
-        <h3>Scan any tag</h3>
-        <p>Take a photo, upload an image, or type it in manually — FieldTag handles any input method.</p>
+  <!-- Toolkit -->
+  <section class="features widgets" id="toolkit">
+    <div class="section-label">THE TOOLKIT</div>
+    <h2 class="section-title">Calculators and references, by trade</h2>
+    <p class="section-sub">Every tool opens to a job, saves its work, and exports a clean report for your customer.</p>
+    <div class="widget-cats">
+      <div class="widget-cat">
+        <h3>HVAC</h3>
+        <h4>Calculators</h4>
+        <ul>
+          <li>SEER Savings Calculator</li>
+          <li>Repair vs. Replace</li>
+          <li>Load Calculation</li>
+          <li>Critical Readings</li>
+          <li>Charge Calculator</li>
+          <li>Flue Sizing</li>
+          <li>Nitrogen Test Compensator</li>
+        </ul>
+        <h4>References</h4>
+        <ul>
+          <li>Refrigerant Guide</li>
+          <li>SEER / SEER2 Reference</li>
+          <li>Equipment Life Span</li>
+          <li>Staging Types Explained</li>
+          <li>Refrigerant Pressure Chart</li>
+          <li>Refrigerant Charge Sheet</li>
+          <li>Static Pressure Test Sheet</li>
+          <li>Maintenance Checklist</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Full specs decoded</h3>
-        <p>Brand, model, serial, age, refrigerant type, electrical requirements, efficiency rating and more.</p>
+      <div class="widget-cat">
+        <h3>Electrical</h3>
+        <h4>Calculators</h4>
+        <ul>
+          <li>Wire Size Calculator</li>
+          <li>Voltage Imbalance</li>
+          <li>Ohm's Law</li>
+        </ul>
+        <h4>References</h4>
+        <ul>
+          <li>Wire Gauge &amp; Ampacity</li>
+          <li>Breaker Sizing Guide</li>
+          <li>Voltage Reference</li>
+          <li>Dangerous Panel Guide</li>
+          <li>Load Calculation Sheet</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📄</div>
-        <h3>PDF reports</h3>
-        <p>Generate a professional equipment report and share it with your customer in one tap.</p>
+      <div class="widget-cat">
+        <h3>Plumbing</h3>
+        <ul>
+          <li>Pipe Sizing Reference</li>
+          <li>Water Heater Guide</li>
+          <li>GPM / Flow Rate</li>
+          <li>Water Pressure Reference</li>
+          <li>Drain Sizing Reference</li>
+          <li>Plumbing Service Report</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📋</div>
-        <h3>Job management</h3>
-        <p>Create job sites, scan all units on-site, and export a complete report for every location.</p>
+      <div class="widget-cat">
+        <h3>General</h3>
+        <ul>
+          <li>Loan Calculator</li>
+          <li>Unit Converter</li>
+          <li>Service Call Report</li>
+          <li>Recall Check</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📚</div>
-        <h3>Service manuals</h3>
-        <p>Automatic links to ManualsLib and Google search for every unit you scan.</p>
+      <div class="widget-cat">
+        <h3>Data-tag scanner</h3>
+        <ul>
+          <li>Scan a tag with the camera, upload a photo, or type it in</li>
+          <li>Brand, model, serial, age, refrigerant and electrical specs</li>
+          <li>Service-manual links for every unit</li>
+          <li>Save scans to a job alongside your calculations</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔔</div>
-        <h3>Age & recall alerts</h3>
-        <p>Instant age status with color-coded replace, monitor, or good indicators. Recall database included.</p>
+      <div class="widget-cat">
+        <h3>Jobs &amp; reports</h3>
+        <ul>
+          <li>Create a job and keep every calculation and scan together</li>
+          <li>Export and share a report for each tool</li>
+          <li>Your work syncs across your devices when you sign in</li>
+        </ul>
       </div>
     </div>
+    <p class="disclaimer">Calculators provide estimates and reference tables are published references. Code compliance and final equipment sizing remain the technician's responsibility.</p>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="shots">
+    <div class="section-label">SEE IT IN ACTION</div>
+    <h2 class="section-title">Built for the truck, not the desk</h2>
+    <p class="section-sub">Fast, glanceable, and readable in bright sun or a dark crawlspace.</p>
+    <div class="hero-screenshots" id="gallery"></div>
   </section>
 
   <!-- Pricing -->
   <section class="pricing" id="pricing">
     <div class="section-label">PRICING</div>
     <h2 class="section-title">Simple, honest pricing</h2>
-    <p class="section-sub">Start free. Upgrade when you're ready.</p>
+    <p class="section-sub">Every tool is free. Go Pro to remove ads and put your business on your reports.</p>
 
     <div class="pricing-grid">
       <div class="pricing-card">
         <div class="pricing-header">
-          <div class="pricing-tier">FREE TIER</div>
-          <div class="pricing-name">FieldTag Free</div>
-          <div class="pricing-desc">Everything you need for occasional scans</div>
+          <div class="pricing-tier">FREE</div>
+          <div class="pricing-name">FieldTag</div>
+          <div class="pricing-desc">The full toolkit, supported by ads</div>
         </div>
         <div class="pricing-features">
-          <div class="pricing-feature"><span class="check">✓</span> Scan with camera, upload, or manual entry</div>
-          <div class="pricing-feature"><span class="check">✓</span> Full equipment specs decoded</div>
-          <div class="pricing-feature"><span class="check">✓</span> Age, refrigerant & electrical info</div>
-          <div class="pricing-feature"><span class="check">✓</span> Service manual lookup</div>
-          <div class="pricing-feature"><span class="check">✓</span> CPSC recall database</div>
-          <div class="pricing-feature"><span class="check">✓</span> Field Guide reference charts</div>
-          <div class="pricing-feature"><span class="check">✓</span> Share results via text or email</div>
-          <div class="pricing-feature" style="color: var(--dim);">✗ Jobs & customer reports</div>
-          <div class="pricing-feature" style="color: var(--dim);">✗ Scan history library</div>
-          <div class="pricing-feature" style="color: var(--dim);">✗ PDF export</div>
+          <div class="pricing-feature"><span class="check">✓</span> All calculators and field-guide references</div>
+          <div class="pricing-feature"><span class="check">✓</span> Data-tag scanner (camera, upload, manual)</div>
+          <div class="pricing-feature"><span class="check">✓</span> Jobs, scan library and history</div>
+          <div class="pricing-feature"><span class="check">✓</span> Export and share every report</div>
+          <div class="pricing-feature"><span class="check">✓</span> Recall search</div>
         </div>
         <div class="pricing-footer">
           <div class="pricing-price-free">Free</div>
-          <div class="pricing-price-note">Ad-supported · No credit card needed</div>
+          <div class="pricing-price-note">Ad-supported · Free account required to sync</div>
           <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="pricing-btn pricing-btn-free">Download free</a>
         </div>
       </div>
@@ -648,16 +693,12 @@
         <div class="pricing-header">
           <div class="pricing-tier" style="color: var(--accent);">PRO</div>
           <div class="pricing-name">FieldTag Pro</div>
-          <div class="pricing-desc">Built for professionals who scan every day</div>
+          <div class="pricing-desc">For pros who hand reports to customers</div>
         </div>
         <div class="pricing-features">
           <div class="pricing-feature"><span class="check-pro">✓</span> Everything in Free</div>
-          <div class="pricing-feature"><span class="check-pro">✓</span> GPT-4.1 — maximum scan accuracy</div>
-          <div class="pricing-feature"><span class="check-pro">✓</span> Jobs — create sites, scan equipment on-site</div>
-          <div class="pricing-feature"><span class="check-pro">✓</span> PDF reports for customers</div>
-          <div class="pricing-feature"><span class="check-pro">✓</span> 90-day scan history with photos</div>
-          <div class="pricing-feature"><span class="check-pro">✓</span> Search and notes on saved scans</div>
           <div class="pricing-feature"><span class="check-pro">✓</span> No ads — ever</div>
+          <div class="pricing-feature"><span class="check-pro">✓</span> Your business name, phone, address and logo on every report</div>
           <div class="pricing-feature"><span class="check-pro">✓</span> 7-day free trial</div>
         </div>
         <div class="pricing-footer">
@@ -668,10 +709,11 @@
             </div>
             <div class="pro-price-row">
               <span class="pro-price-label">Monthly</span>
-              <span class="pro-price-amount">$5.99/mo</span>
+              <span class="pro-price-amount">$4.99/mo</span>
             </div>
           </div>
           <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="pricing-btn pricing-btn-pro">Start 7-day free trial</a>
+          <p class="pricing-price-note" style="margin: 12px 0 0;">Auto-renews until cancelled. Manage or cancel any time in Settings → Apple ID → Subscriptions. See our <a href="/terms.html" style="text-decoration: underline;">Terms</a>.</p>
         </div>
       </div>
     </div>
@@ -681,13 +723,12 @@
   <section class="who">
     <div class="section-label">WHO IT'S FOR</div>
     <h2 class="section-title">Built for the field</h2>
-    <p class="section-sub" style="margin-bottom: 28px;">Whether you're a licensed pro or a curious homeowner — FieldTag works for anyone who needs to know what's in front of them.</p>
+    <p class="section-sub" style="margin-bottom: 28px;">If you size it, charge it, wire it or pipe it for a living, FieldTag is in your corner.</p>
     <div class="who-pills">
       <span class="who-pill">🔧 HVAC technicians</span>
       <span class="who-pill">⚡ Electricians</span>
       <span class="who-pill">🔩 Plumbers</span>
       <span class="who-pill">🏠 Home inspectors</span>
-      <span class="who-pill">🏡 Homeowners</span>
       <span class="who-pill">🔨 Appliance repair</span>
       <span class="who-pill">🏗️ Property managers</span>
     </div>
@@ -695,17 +736,13 @@
 
   <!-- Download -->
   <section class="download" id="download">
-    <h2>Ready to scan smarter?</h2>
-    <p>Download FieldTag free — no account required to get started.</p>
+    <h2>Ready to work smarter?</h2>
+    <p>Download FieldTag free on iPhone and iPad.</p>
     <div class="download-btns">
       <a href="https://apps.apple.com/us/app/fieldtag/id6784482782" class="dl-btn dl-btn-ios">
-        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on App Store
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
       </a>
-      <span class="dl-btn dl-btn-android">
-        <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.16.64.19.96.09l13.26-7.62-2.86-2.87-11.36 10.4zM.5 1.28C.19 1.6 0 2.1 0 2.73v18.54c0 .63.19 1.13.5 1.45l.07.07 10.38-10.38v-.25L.57 1.21.5 1.28zM20.93 10.3l-2.78-1.6-3.17 3.17 3.17 3.17 2.81-1.62c.8-.46.8-1.21-.03-1.67v-.45zM4.14.24L17.4 7.86l-2.86 2.86L3.18.32c.32-.1.66-.07.96.08v-.16z"/></svg>
-        Google Play — coming soon
-      </span>
     </div>
   </section>
 
@@ -723,48 +760,41 @@
   </footer>
 
   <script>
-    const images = [
-      'screenshot_1_home.png',
-      'screenshot_2_processing.png',
-      'screenshot_3_results.png'
+    // Screenshot set. S1 (screenshots lane) replaces these files with 6.9" light/dark shots;
+    // edit this list only. {src, label}
+    const SHOTS = [
+      { src: 'screenshot_1_home.png', label: 'Choose how to scan' },
+      { src: 'screenshot_2_processing.png', label: 'AI decodes the tag' },
+      { src: 'screenshot_3_results.png', label: 'Full specs in seconds' }
     ];
+    const images = SHOTS.map(s => s.src);
     let currentIndex = 0;
 
-    function updateDots() {
-      document.querySelectorAll('.lightbox-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
+    function shotHTML(s, i) {
+      return '<div class="screenshot-wrap" onclick="openLightbox(' + i + ')"><img src="' + s.src + '" alt="FieldTag: ' + s.label + '"><span class="screenshot-label">' + s.label + '</span></div>';
     }
+    const all = SHOTS.map(shotHTML).join('');
+    document.getElementById('hero-shots').innerHTML = all;
+    document.getElementById('gallery').innerHTML = all;
+    document.getElementById('lightbox-dots').innerHTML = SHOTS.map((_, i) => '<div class="lightbox-dot" onclick="goToImage(' + i + ')"></div>').join('');
 
+    function updateDots() {
+      document.querySelectorAll('.lightbox-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+    }
+    function show() { document.getElementById('lightbox-img').src = images[currentIndex]; updateDots(); }
     function openLightbox(index) {
-      currentIndex = index;
-      document.getElementById('lightbox-img').src = images[currentIndex];
+      currentIndex = index; show();
       document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
-      updateDots();
     }
-
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('active');
       document.body.style.overflow = '';
     }
+    function changeImage(d) { currentIndex = (currentIndex + d + images.length) % images.length; show(); }
+    function goToImage(i) { currentIndex = i; show(); }
 
-    function changeImage(direction) {
-      currentIndex = (currentIndex + direction + images.length) % images.length;
-      document.getElementById('lightbox-img').src = images[currentIndex];
-      updateDots();
-    }
-
-    function goToImage(index) {
-      currentIndex = index;
-      document.getElementById('lightbox-img').src = images[currentIndex];
-      updateDots();
-    }
-
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-      if (e.target === this) closeLightbox();
-    });
-
+    document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
     document.addEventListener('keydown', function(e) {
       if (!document.getElementById('lightbox').classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
