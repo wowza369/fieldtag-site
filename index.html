@@ -524,6 +524,7 @@
     .disclaimer { max-width: 720px; margin: 28px auto 0; text-align: center; font-size: 12px; color: var(--dim); line-height: 1.6; }
     .shots { padding: 64px 24px; background: var(--bg2); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
     .shots .hero-screenshots { margin-bottom: 0; }
+    #hero-shots, #gallery { align-items: flex-end; }
     #gallery { flex-wrap: wrap; max-width: 900px; row-gap: 28px; }
     @media (max-width: 600px) { #hero-shots { gap: 8px; } #hero-shots .screenshot-wrap img { width: 30vw; max-width: 120px; } #gallery .screenshot-wrap img { width: 42vw; max-width: 170px; } }
   </style>
@@ -658,7 +659,7 @@
   <section class="shots">
     <div class="section-label">SEE IT IN ACTION</div>
     <h2 class="section-title">Built for the truck, not the desk</h2>
-    <p class="section-sub">Fast, glanceable, and readable in bright sun or a dark crawlspace.</p>
+    <p class="section-sub">Big tap targets, fast results, and light and dark themes for any job site.</p>
     <div class="hero-screenshots" id="gallery"></div>
   </section>
 
@@ -764,11 +765,11 @@
       { src: 'shots/home.jpg', label: 'Home tools' },
       { src: 'shots/charge.jpg', label: 'Charge calculator' },
       { src: 'shots/pdf-report.jpg', label: 'Customer report' },
-      { src: 'shots/scan-result.jpg', label: 'Decoded data tag' },
+      { src: 'shots/field-guide.jpg', label: 'HVAC field guide' },
       { src: 'shots/load-calc.jpg', label: 'Load calculation' },
-      { src: 'shots/seer-savings.jpg', label: 'SEER savings' },
       { src: 'shots/repair-replace.jpg', label: 'Repair vs. replace' },
-      { src: 'shots/field-guide.jpg', label: 'HVAC field guide' }
+      { src: 'shots/seer-savings.jpg', label: 'SEER savings' },
+      { src: 'shots/scan-result.jpg', label: 'Decoded data tag' }
     ];
     const images = SHOTS.map(s => s.src);
     let currentIndex = 0;
